@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 const equipos = Array.from({ length: 40 }, (_, i) => 'PC-' + String(i + 1).padStart(2, '0'));
+
 const preguntas = [
   { texto: '¿Cuánto es 12 + 8?', opciones: ['18', '20', '22'] },
   { texto: '¿Cuántos minutos hay en una hora?', opciones: ['30', '60', '100'] },
@@ -107,19 +108,8 @@ export function crearServidor({ clave, avisarMs = 5500, responderMs = 6000 } = {
     [ruta, { archivo: readFileSync(new URL('./public/' + archivo, import.meta.url)), tipo }]
   ));
 
-  // Los dos módulos de entrada incluyen sus utilidades en la misma respuesta.
-  const utilidades = paginas.get('/comun.js').archivo.toString('utf8');
-  const importacionComun = /^import\s+\{[^}]*\}\s+from\s+(['"])\.\/comun\.js\1;?[ \t]*(?:\r?\n|$)/m;
-
-  for (const ruta of ['/docente.js', '/equipo.js']) {
-    const pagina = paginas.get(ruta);
-    const fuente = pagina.archivo.toString('utf8');
-    const codigo = fuente.replace(importacionComun, '');
-
-    if (codigo !== fuente) {
-      pagina.archivo = Buffer.from(utilidades + '\n' + codigo, 'utf8');
-    }
-  }
+  // Sirve el mismo archivo en las dos rutas de comun.js.
+  paginas.set('/public/comun.js', paginas.get('/comun.js'));
 
   function verificarDocente(req) {
     const autorizacion = req.headers.authorization || '';

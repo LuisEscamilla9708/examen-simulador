@@ -1,4 +1,7 @@
-import { elemento, rutaSala, solicitar, tiempo } from './public/comun.js';
+
+
+import { elemento, rutaSala, solicitar, tiempo } from '/comun.js';
+
 
 const params = new URLSearchParams(location.search);
 const sala = params.get('s');

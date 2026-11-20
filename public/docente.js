@@ -1,4 +1,6 @@
-import { elemento, rutaSala, solicitar, tiempo } from './public/comun.js';
+
+import { elemento, rutaSala, solicitar, tiempo } from '/comun.js';
+
 
 const estado = elemento('estado');
 const crear = elemento('boton-crear');

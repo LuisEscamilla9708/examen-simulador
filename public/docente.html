@@ -1,0 +1,52 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel docente · PILARES</title>
+  <link rel="stylesheet" href="/estilo.css">
+  <script type="module" src="/docente.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="sede">PILARES</p>
+      <h1>Panel docente</h1>
+    </header>
+    <section class="panel">
+      <form id="crear">
+        <label for="clave">Clave docente</label>
+        <input id="clave" type="password" autocomplete="off" required>
+        <button id="boton-crear">Crear sala</button>
+      </form>
+      <p id="estado" role="status">Crea una sala para obtener la liga de las computadoras.</p>
+    </section>
+    <section class="panel" id="sala" hidden>
+      <div class="acciones">
+        <label for="liga">Liga para las 40 computadoras</label>
+        <input id="liga" type="url" readonly>
+        <button id="copiar" class="secundario" type="button">Copiar liga</button>
+      </div>
+      <div class="acciones separacion">
+        <button id="iniciar" type="button">Iniciar examen</button>
+        <button id="csv" class="secundario" type="button">Descargar resultados CSV</button>
+      </div>
+      <dl>
+        <div><dt>Listas al pulsar Iniciar</dt><dd id="listas">0/40</dd></div>
+        <div><dt>Abrieron el examen</dt><dd id="abiertas">0/40</dd></div>
+        <div><dt>Entregas recibidas</dt><dd id="enviadas">0/40</dd></div>
+        <div><dt>Intervalo entre primera y última entrega</dt><dd id="intervalo">—</dd></div>
+      </dl>
+      <div class="tabla">
+        <table>
+          <thead><tr>
+            <th scope="col">Equipo</th><th scope="col">Estado</th><th scope="col">Carga de la liga</th>
+            <th scope="col">Carga del examen</th><th scope="col">Llegada del envío*</th>
+            <th scope="col">Confirmación</th>
+          </tr></thead>
+          <tbody id="equipos"></tbody>
+        </table>
+      </div>
+      <p class="nota">* Tiempo transcurrido desde la hora de envío programada hasta que el servidor recibió la entrega.</p>
+    </section>
+  </main>
+</body>
+</html>

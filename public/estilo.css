@@ -1,0 +1,56 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  font-size: 16px;
+  color: #192d24;
+  background: #edf3ef;
+}
+body { margin: 0; }
+main { margin: 2.4rem auto; padding: 0 1rem; max-width: 72rem; }
+main.equipo { max-width: 42rem; }
+header { margin-bottom: 1.3rem; }
+.sede, .etiqueta { color: #126047; font-weight: 760; letter-spacing: .06em; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.1; margin: .2rem 0; }
+h2 { margin: 0 0 .8rem; font-size: 1.2rem; }
+p { margin: .55rem 0; }
+p:empty { display: none; }
+.panel {
+  margin-bottom: 1rem;
+  padding: clamp(1rem, 3vw, 1.6rem);
+  border: 1px solid #cddad2;
+  border-radius: .7rem;
+  background: #fff;
+}
+form, .acciones { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; }
+label { font-weight: 650; }
+input, select, button {
+  font: inherit;
+  border: 1px solid #82958a;
+  border-radius: .35rem;
+  padding: .55rem .75rem;
+}
+input { background: white; }
+input[readonly] { flex: 1 1 18rem; min-width: 0; }
+button { background: #14553f; border-color: #14553f; color: white; font-weight: 650; cursor: pointer; }
+button.secundario { background: white; color: #14553f; }
+button:disabled { cursor: default; opacity: .55; }
+:focus-visible { outline: 3px solid #985619; outline-offset: 2px; }
+.separacion { margin-top: .9rem; }
+dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: .7rem;
+  margin: 1.25rem 0;
+}
+dl div { background: #f0f6f2; padding: .7rem; border-radius: .3rem; }
+dt, .nota { color: #4e6257; font-size: .89rem; }
+dd { margin: .15rem 0 0; font-size: 1.3rem; font-weight: 750; }
+.tabla { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; white-space: nowrap; }
+th, td { padding: .5rem .65rem; text-align: left; border-bottom: 1px solid #dbe7df; }
+th { background: #f1f6f3; }
+tr[data-estado="Entrega recibida"] td:nth-child(2) { color: #116343; font-weight: 670; }
+tr[data-estado^="Sin "] td:nth-child(2), tr[data-estado^="Falló"] td:nth-child(2) { color: #903c19; }
+.pregunta { margin: .7rem 0; padding-top: .55rem; border-top: 1px solid #e6ece8; }
+.respuesta { color: #29614c; }

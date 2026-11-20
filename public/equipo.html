@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulacro automático · PILARES</title>
+  <link rel="stylesheet" href="/estilo.css">
+  <script type="module" src="/equipo.js"></script>
+</head>
+<body>
+  <main class="equipo">
+    <header>
+      <p class="sede">PILARES</p>
+      <h1>Simulacro automático</h1>
+    </header>
+    <section class="panel" id="registro">
+      <h2>Identifica esta computadora</h2>
+      <form id="unir">
+        <label for="numero">Número de PC</label>
+        <select id="numero" required><option value="">Selecciona el número</option></select>
+        <button id="boton-unir">Entrar a la sala</button>
+      </form>
+    </section>
+    <section class="panel">
+      <p class="etiqueta" id="identidad"></p>
+      <h2 id="estado" role="status">Abre la liga que comparte el docente.</h2>
+      <p id="detalle"></p>
+      <div id="preguntas"></div>
+      <p id="medicion"></p>
+    </section>
+  </main>
+</body>
+</html>

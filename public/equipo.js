@@ -1,16 +1,13 @@
-
-
 import { elemento, rutaSala, solicitar, tiempo } from '/comun.js';
 
-
 const params = new URLSearchParams(location.search);
-const sala = params.get('s');
+let sala = params.get('s');
 const numero = elemento('numero');
 const boton = elemento('boton-unir');
 const estado = elemento('estado');
 const detalle = elemento('detalle');
 const preguntasVista = elemento('preguntas');
-const claveLocal = 'pilares-equipo-' + sala;
+let claveLocal;
 const validez = /^PC-(0[1-9]|[1-3][0-9]|40)$/;
 let registro;
 let referenciaServidor = null;
@@ -169,13 +166,37 @@ elemento('unir').addEventListener('submit', evento => {
   void unir();
 });
 
-if (!sala || !/^[a-f0-9]{10}$/.test(sala)) {
-  elemento('registro').hidden = true;
-} else {
+function mostrarSala(id) {
+  sala = id;
+  claveLocal = 'pilares-equipo-' + sala;
+  elemento('registro').hidden = false;
   mensaje('Sala disponible', 'Selecciona el número que identifica esta computadora.');
   const preseleccion = params.get('pc') || cargarRegistro()?.equipo;
   if (validez.test(preseleccion || '')) {
     numero.value = preseleccion;
-    window.addEventListener('load', () => setTimeout(unir, 0), { once: true });
+    if (document.readyState === 'complete') setTimeout(unir, 0);
+    else window.addEventListener('load', () => setTimeout(unir, 0), { once: true });
   }
+}
+
+async function esperarSala() {
+  try {
+    const datos = await solicitar('/api/sala-activa', { esperaMs: 5000 });
+    if (datos.id) {
+      mostrarSala(datos.id);
+      return;
+    }
+    mensaje('Esperando al docente', 'El selector se mostrará cuando se abra una sala para el simulacro.');
+  } catch {
+    mensaje('Intentando conectar…', 'La página volverá a buscar una sala del simulacro.');
+  }
+  setTimeout(esperarSala, 3000 + Math.random() * 1000);
+}
+
+if (sala && /^[a-f0-9]{10}$/.test(sala)) {
+  mostrarSala(sala);
+} else {
+  elemento('registro').hidden = true;
+  mensaje('Esperando al docente');
+  void esperarSala();
 }

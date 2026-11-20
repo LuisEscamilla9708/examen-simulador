@@ -1,6 +1,4 @@
-
 import { elemento, rutaSala, solicitar, tiempo } from '/comun.js';
-
 
 const estado = elemento('estado');
 const crear = elemento('boton-crear');
@@ -103,9 +101,7 @@ elemento('crear').addEventListener('submit', async evento => {
     tabla.replaceChildren();
     elemento('sala').hidden = false;
     elemento('clave').value = '';
-    const direccion = new URL('/', location.href);
-    direccion.searchParams.set('s', sala);
-    liga.value = direccion.href;
+    liga.value = new URL('/', location.href).href;
     estado.textContent = 'Sala creada. Comparte la liga para registrar las computadoras.';
     iniciar.disabled = false;
     csv.disabled = true;

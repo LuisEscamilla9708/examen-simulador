@@ -4,12 +4,30 @@ import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 const equipos = Array.from({ length: 40 }, (_, i) => 'PC-' + String(i + 1).padStart(2, '0'));
+
 const preguntas = [
   { texto: '¿Cuánto es 12 + 8?', opciones: ['18', '20', '22'] },
   { texto: '¿Cuántos minutos hay en una hora?', opciones: ['30', '60', '100'] },
   { texto: '¿Cuál de estos objetos sirve para escribir?', opciones: ['Vaso', 'Regla', 'Lápiz'] },
-  { texto: 'Si pagas $50 por un producto de $35, ¿cuál es tu cambio?', opciones: ['$10', '$15', '$20'] }
+  { texto: 'Si pagas $50 por un producto de $35, ¿cuál es tu cambio?', opciones: ['$10', '$15', '$20'] },
+  { texto: '¿Cuánto es 48 + 27?', opciones: ['65', '75', '85'] },
+  { texto: '¿Cuánto es 120 − 45?', opciones: ['75', '85', '65'] },
+  { texto: '¿Cuánto es 7 × 6?', opciones: ['36', '48', '42'] },
+  { texto: '¿Cuánto es 56 ÷ 8?', opciones: ['6', '8', '7'] },
+  { texto: '¿Cuál es la mitad de 90?', opciones: ['45', '40', '50'] },
+  { texto: '¿Cuál es la cuarta parte de 100?', opciones: ['20', '40', '25'] },
+  { texto: 'Cada cuaderno cuesta $35. ¿Cuánto cuestan tres?', opciones: ['$95', '$105', '$115'] },
+  { texto: 'Pagas $200 por una compra de $135. ¿Cuánto recibes de cambio?', opciones: ['$55', '$65', '$75'] },
+  { texto: '¿Cuántos minutos son 2 horas y 30 minutos?', opciones: ['120', '130', '150'] },
+  { texto: '¿Cuál de estas fracciones es la mayor?', opciones: ['1/2', '3/4', '1/4'] },
+  { texto: 'La tienda abre a las 10:00. Llegas a las 9:45. ¿Cuánto debes esperar?', opciones: ['5 minutos', '10 minutos', '15 minutos'] },
+  { texto: '¿Qué letrero indica por dónde evacuar un edificio?', opciones: ['Sala de espera', 'Salida de emergencia', 'Baños'] },
+  { texto: 'Una cita es a las 16:00. ¿A qué hora es?', opciones: ['4 de la tarde', '6 de la tarde', '4 de la mañana'] },
+  { texto: 'Una receta usa 4 tazas de harina. ¿Cuántas necesitas para preparar el doble?', opciones: ['4 tazas', '8 tazas', '6 tazas'] },
+  { texto: 'El camión sale a las 7:20 y tarda 25 minutos. ¿A qué hora llega?', opciones: ['7:35', '7:40', '7:45'] },
+  { texto: '¿Cuántos mililitros hay en un litro?', opciones: ['100', '1,000', '10,000'] }
 ];
+
 const formatos = {
   '/': ['equipo.html', 'text/html'],
   '/docente': ['docente.html', 'text/html'],
@@ -86,7 +104,7 @@ function resumenSala(sala) {
   return { ...datosSala(sala), listasAlInicio: sala.listasAlInicio, filas };
 }
 
-export function crearServidor({ clave, avisarMs = 5500, responderMs = 6000 } = {}) {
+export function crearServidor({ clave, avisarMs = 5500, responderMs = 16000 } = {}) {
   if (!clave) throw new Error('Falta la clave docente.');
   const claveHash = hash(clave);
   const salas = new Map();
